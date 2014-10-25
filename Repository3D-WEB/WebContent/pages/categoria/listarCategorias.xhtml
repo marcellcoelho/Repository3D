@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	template="/resources/template/template.xhtml">
+	<ui:define name="corpo">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Lista de Categorias</h1>
+			</div>
+		</div>
+		<br />
+		<h:form id="formList" prependId="false">
+			<div class="row">
+				<div class="col-lg-12">
+					<p:commandButton value="Cadastrar categoria" onclick="PF('dlgCategoria').show()" title="Cadastrar Categoria" style="float: right;" />
+					<br/><br/>
+					<p:treeTable value="#{categoriaMB.raiz}" var="categoria"
+						sortBy="true">
+						<p:column headerText="Nome" sortBy="#{categoria.nome}">
+							<h:outputLabel value="#{categoria.nome}" />
+						</p:column>
+						<p:column headerText="Descrição">
+							<h:outputText value="#{categoria.descricao}" />
+						</p:column>
+						<p:column headerText="Opções" style="width: 80px;">
+							<p:commandLink actionListener="#{categoriaMB.abrirModalCadastroSubcategoria(categoria)}"
+								title="Cadastrar Subcategoria"
+								styleClass="ui-icon ui-icon-plusthick" />
+							<p:commandLink action="/pages/objeto/cadastrarObjeto" rendered="#{not empty categoria.categoriaPai || empty categoria.subcategorias || not empty categoria.objetoList}"
+								title="Cadastrar Objeto" styleClass="ui-icon ui-icon-gear">
+								<f:setPropertyActionListener target="#{objetoMB.categoria}"	value="#{categoria}" />
+							</p:commandLink>
+						</p:column>
+					</p:treeTable>
+				</div>
+			</div>
+		</h:form>
+
+		<p:dialog id="categoriaDlg"
+			header="Cadastrar categoria"
+			width="600" widgetVar="dlgCategoria" closable="false"
+			resizable="false">
+			<h:form prependId="false">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="nomeCategoria" value="Nome: " />
+							<p:inputText id="nomeCategoria" value="#{categoriaMB.categoria.nome}"
+								styleClass="form-control" required="true" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="descricaoCategoria" value="Descrição: " />
+							<p:inputTextarea id="descricaoCategoria"
+								value="#{categoriaMB.categoria.descricao}"
+								styleClass="form-control" rows="5" autoResize="false" style="resize: none;"
+								maxlength="150" cols="5" required="true" />
+						</div>
+					</div>
+				</div>
+				<p:commandButton actionListener="#{categoriaMB.cadastrarCategoria()}" update="@form" value="Cadastrar" />
+				<p:commandButton type="reset" value="Cancelar" onclick="PF('dlgCategoria').hide()" style="margin-left: 10px;" />
+			</h:form>
+		</p:dialog>
+		
+		<p:dialog id="subcategoriaDlg"
+			header="Cadastrar subcategoria em #{categoriaMB.categoriaPai.nome}"
+			width="600" widgetVar="dlgSubcategoria" closable="false"
+			resizable="false">
+			<h:form prependId="false">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="nomeSubcategoria" value="Nome: " />
+							<p:inputText id="nomeSubcategoria" value="#{categoriaMB.categoria.nome}"
+								styleClass="form-control" required="true" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="form-group">
+							<p:outputLabel for="descricaoSubcategoria" value="Descrição: " />
+							<p:inputTextarea id="descricaoSubcategoria"
+								value="#{categoriaMB.categoria.descricao}"
+								styleClass="form-control" rows="5" autoResize="false" style="resize: none;"
+								maxlength="150" cols="5" required="true" />
+						</div>
+					</div>
+				</div>
+				<p:commandButton actionListener="#{categoriaMB.cadastrarSubcategoria()}" update="@form" value="Cadastrar" />
+				<p:commandButton type="reset" value="Cancelar" onclick="PF('dlgSubcategoria').hide()" style="margin-left: 10px;" />
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

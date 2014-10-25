@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="Repository3D-EAR">
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+        <dependent-module archiveName="Repository3D-EJB.jar" deploy-path="/" handle="module:/resource/Repository3D-EJB/Repository3D-EJB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Repository3D-JPA.jar" deploy-path="/lib" handle="module:/resource/Repository3D-JPA/Repository3D-JPA">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Repository3D-WEB.war" deploy-path="/" handle="module:/resource/Repository3D-WEB/Repository3D-WEB">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+    </wb-module>
+</project-modules>
