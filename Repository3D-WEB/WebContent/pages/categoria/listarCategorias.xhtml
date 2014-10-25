@@ -18,7 +18,7 @@
 					<p:commandButton value="Cadastrar categoria" onclick="PF('dlgCategoria').show()" title="Cadastrar Categoria" style="float: right;" />
 					<br/><br/>
 					<p:treeTable value="#{categoriaMB.raiz}" var="categoria"
-						sortBy="true">
+						sortBy="true" emptyMessage="Cadastre uma categoria">
 						<p:column headerText="Nome" sortBy="#{categoria.nome}">
 							<h:outputLabel value="#{categoria.nome}" />
 						</p:column>

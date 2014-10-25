@@ -11,10 +11,8 @@
 	    <h:outputScript library="js" name="x3dom.js" />
 	</ui:define>
 	<ui:define name="corpo">
-		<h:form>
 			<ui:repeat var="objeto" value="#{objetoMB.objetoList}">
 				<h:outputText value="#{objeto.objeto}" escape="false" />
 			</ui:repeat>
-		</h:form>
 	</ui:define>
 </ui:composition>
