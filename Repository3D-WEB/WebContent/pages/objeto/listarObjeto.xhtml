@@ -11,15 +11,21 @@
 		<h:outputScript library="js" name="x3dom.js" />
 	</ui:define>
 	<ui:define name="corpo">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">
+					<h:outputText value="Lista de Objetos" />
+				</h1>
+			</div>
+		</div>
+		<br />
 		<h:form id="form">
 		    <p:dataGrid var="objeto" value="#{objetoMB.objetoList}" columns="2" layout="grid"
-		        rows="6" paginator="true" paginatorPosition="buttom"
+		        rows="6" paginator="true" paginatorPosition="bottom"
 		        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		        rowsPerPageTemplate="6,12,18">
-		 
-	 
 		        <p:panel header="#{objeto.nome}" style="text-align:center">
-		            <h:panelGrid columns="1" style="width:100%">
+		            <h:panelGrid columns="1" width="100%" style="height: 400px;">
 		                <h:outputText value="#{objeto.objeto}" escape="false" /> 
 		            </h:panelGrid>
 		        </p:panel>

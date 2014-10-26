@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name="TB_CATEGORIA")
 public class Categoria extends AbstractEntity implements Comparable<Categoria>  {
@@ -31,6 +29,9 @@ public class Categoria extends AbstractEntity implements Comparable<Categoria>  
 	
 	@Column(name="DS_DESCRICAO")
 	private String descricao;
+	
+	@Column(name="FL_CATEGORIA_RAIZ")
+	private boolean categoriaRaiz;
 	
 	@ManyToOne
 	@JoinColumn(name = "FK_CATEGORIA_PAI")
@@ -88,6 +89,14 @@ public class Categoria extends AbstractEntity implements Comparable<Categoria>  
 
 	public void setObjetoList(List<Objeto> objetoList) {
 		this.objetoList = objetoList;
+	}
+	
+	public boolean isCategoriaRaiz() {
+		return categoriaRaiz;
+	}
+
+	public void setCategoriaRaiz(boolean categoriaRaiz) {
+		this.categoriaRaiz = categoriaRaiz;
 	}
 
 	@Override

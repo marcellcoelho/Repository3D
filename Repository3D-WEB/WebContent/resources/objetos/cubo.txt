@@ -1,4 +1,4 @@
-<x3d xmlns="http://www.x3dom.org/x3dom" showstat="false" showlog="false" x="0px" y="0px" width="400px" height="400px" altimg="helloX3D-alt.png">
+<x3d xmlns="http://www.x3dom.org/x3dom" showstat="false" showlog="false" x="0px" y="0px" altimg="helloX3D-alt.png">
           <scene render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" pickmode="idBuf" dopickpass="true">
             <viewpoint position="0 0 10" fieldofview="0.785398" orientation="0,0,0,0" centerofrotation="0,0,0" znear="-1" zfar="-1"></viewpoint>
               <shape render="true" bboxcenter="0,0,0" bboxsize="-1,-1,-1" ispickable="true">

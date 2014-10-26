@@ -17,21 +17,23 @@
 				<div class="col-lg-12">
 					<p:commandButton value="Cadastrar categoria" onclick="PF('dlgCategoria').show()" title="Cadastrar Categoria" style="float: right;" />
 					<br/><br/>
-					<p:treeTable value="#{categoriaMB.raiz}" var="categoria"
+					<p:treeTable value="#{categoriaMB.raiz}" var="categoria" 
 						sortBy="true" emptyMessage="Cadastre uma categoria">
-						<p:column headerText="Nome" sortBy="#{categoria.nome}">
+						<p:column headerText="Nome" sortBy="#{categoria.nome}" style="width: 50%;">
 							<h:outputLabel value="#{categoria.nome}" />
 						</p:column>
-						<p:column headerText="Descrição">
-							<h:outputText value="#{categoria.descricao}" />
+						<p:column headerText="Descrição" style="width: 30%;">
+								<h:outputText value="#{categoria.descricao}" />
 						</p:column>
-						<p:column headerText="Opções" style="width: 80px;">
+						<p:column headerText="Opções" style="width: 20%;" >
 							<p:commandButton actionListener="#{categoriaMB.abrirModalCadastroSubcategoria(categoria)}"
-								title="Cadastrar Subcategoria" value="Cadastrar Subcategoria" />
-							<p:commandButton action="/pages/objeto/cadastrarObjeto?faces-redirect=true" ajax="false" rendered="#{not empty categoria.categoriaPai || empty categoria.subcategorias}"
+								title="Cadastrar Subcategoria" value="Cadastrar Subcategoria" rendered="#{(empty categoria.objetoList || categoria.categoriaRaiz)}"/>
+							<p:commandButton action="/pages/objeto/cadastrarObjeto?faces-redirect=true" ajax="false" rendered="#{(empty categoria.subcategorias and !categoria.categoriaRaiz)}"
 								title="Cadastrar Objeto" value="Cadastrar Objeto">
 								<f:setPropertyActionListener target="#{objetoMB.categoria}"	value="#{categoria}" />
 							</p:commandButton>
+							<p:commandButton action="#{objetoMB.getAllDaCategoria(categoria)}" ajax="false" rendered="#{(empty categoria.subcategorias and !categoria.categoriaRaiz)}"
+								title="Cadastrar Objeto" value="Listar Objetos"/>
 						</p:column>
 					</p:treeTable>
 				</div>
@@ -40,7 +42,7 @@
 
 		<p:dialog id="categoriaDlg"
 			header="Cadastrar categoria"
-			width="600" widgetVar="dlgCategoria" closable="false"
+			width="400" widgetVar="dlgCategoria" closable="false"
 			resizable="false">
 			<h:form prependId="false">
 				<div class="row">
@@ -70,7 +72,7 @@
 		
 		<p:dialog id="subcategoriaDlg"
 			header="Cadastrar subcategoria em #{categoriaMB.categoriaPai.nome}"
-			width="600" widgetVar="dlgSubcategoria" closable="false"
+			width="400" widgetVar="dlgSubcategoria" closable="false"
 			resizable="false">
 			<h:form prependId="false">
 				<div class="row">

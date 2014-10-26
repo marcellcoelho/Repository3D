@@ -40,6 +40,7 @@ public class CategoriaMB implements Serializable {
 	}
 	
 	public void cadastrarCategoria() {
+		categoria.setCategoriaRaiz(true);
 		categoriaService.salvar(categoria);
 		categoria = new Categoria();
 		getAllRaizes();

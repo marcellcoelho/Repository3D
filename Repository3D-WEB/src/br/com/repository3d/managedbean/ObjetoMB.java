@@ -33,17 +33,22 @@ public class ObjetoMB extends ConversationBaseBean {
 	public void init() {
 		objeto = new Objeto();
 		categoria = new Categoria();
-		objetoList = objetoService.getAll();
+		objetoList = objetoService.getAllOrderByNome();
 	}
 	
 	public String cadastrarObjeto() {
 		objeto.setCategoria(categoria);
 		objetoService.salvar(objeto);
-		objetoList = objetoService.getAll();
+		objetoList = objetoService.getAllOrderByNome();
 		FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Successful") );
         endConversation();
-		return "listarObjeto";
+		return "listarObjeto?faces-redirect=true";
+	}
+	
+	public String getAllDaCategoria(Categoria categoria) {
+		objetoList = objetoService.getAllDaCategoria(categoria);
+		return "/pages/objeto/listarObjeto?faces-redirect=true";
 	}
 	
 	// *************************SETs & GETs ***********************/
