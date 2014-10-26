@@ -6,12 +6,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/resources/template/template.xhtml">
-	<ui:define name="head">
-		<h:outputStylesheet library="css" name="x3dom.css" />
-		<h:outputScript library="js" name="x3dom.js" />
-	</ui:define>
 	<ui:define name="corpo">
-		<h:form prependId="false">
+		<h:form id="form" prependId="true">
 			<div class="row">
 				<div class="col-lg-12">
 					<h1 class="page-header"><h:outputText id="nomeDaCategoria" value="Cadastrar Objeto" /></h1>
@@ -24,11 +20,6 @@
 						<p:outputLabel for="categoria" value="Categoria:" />
 						<p:inputText id="categoria" styleClass="form-control"
 							value="#{objetoMB.categoria.nome}" disabled="true"  />
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="form-group">
-						<h:outputText id="objeto" value="#{objetoMB.objeto.objeto}" escape="false" rendered="#{not empty objetoMB.objeto.objeto}" />
 					</div>
 				</div>
 			</div>
@@ -46,32 +37,16 @@
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="form-group">
-						<p:outputLabel for="descricao" value="Descrição:" />
-						<p:inputTextarea id="descricao" styleClass="form-control" style="resize: none;"
-							value="#{objetoMB.objeto.descricao}" rows="5" autoResize="false"
-							maxlength="150" cols="5" required="true" />
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="form-group">
 						<p:outputLabel for="objeto3d" value="Objeto 3D:" />
 						<p:inputTextarea id="objeto3d" styleClass="form-control" style="resize: none;"
 							value="#{objetoMB.objeto.objeto}" rows="20" autoResize="false"
-							required="true">
-							<p:ajax process="objeto3d" event="blur" update="@form"/>
-							</p:inputTextarea>
+							required="true"/>
 					</div>
 				</div>
 			</div>
 
-			<p:commandButton action="#{objetoMB.cadastrarObjeto()}" update="@form"
-					value="Cadastrar" />
-			<p:commandButton type="reset" value="Cancelar" update="form"
-					 style="margin-left: 10px;" />
-
+			<p:commandButton action="#{objetoMB.cadastrarObjeto()}" update="form" value="Cadastrar" />
+			<p:commandButton type="reset" value="Cancelar" update="form" style="margin-left: 10px;" />
 		</h:form>
 	</ui:define>
 </ui:composition>

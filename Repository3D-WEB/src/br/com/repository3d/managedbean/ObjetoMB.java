@@ -5,9 +5,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
-
-import org.primefaces.context.RequestContext;
 
 import br.com.repository.entidades.Categoria;
 import br.com.repository.entidades.Objeto;
@@ -39,7 +39,11 @@ public class ObjetoMB extends ConversationBaseBean {
 	public String cadastrarObjeto() {
 		objeto.setCategoria(categoria);
 		objetoService.salvar(objeto);
-		return "listar";
+		objetoList = objetoService.getAll();
+		FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Successful") );
+        endConversation();
+		return "listarObjeto";
 	}
 	
 	// *************************SETs & GETs ***********************/

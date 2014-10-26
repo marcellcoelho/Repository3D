@@ -39,7 +39,7 @@ public class Categoria extends AbstractEntity implements Comparable<Categoria>  
 	@OneToMany(mappedBy = "categoriaPai", fetch=FetchType.EAGER)
 	private List<Categoria> subcategorias;
 	
-	@OneToMany(mappedBy = "categoria",  fetch=FetchType.EAGER )
+	@OneToMany(mappedBy = "categoria",  fetch=FetchType.EAGER)
 	private List<Objeto> objetoList;
 	
 	public Long getIdCategoria() {

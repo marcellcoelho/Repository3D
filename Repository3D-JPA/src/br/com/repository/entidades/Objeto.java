@@ -21,10 +21,7 @@ public class Objeto extends AbstractEntity  {
 	
 	@Column(name="DS_NOME")
 	private String nome;
-	
-	@Column(name="DS_DESCRICAO")
-	private String descricao;
-	
+		
 	@Lob
 	@Column(name="BL_OBJETO")
 	private String objeto;
@@ -46,14 +43,6 @@ public class Objeto extends AbstractEntity  {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 
 	public String getObjeto() {

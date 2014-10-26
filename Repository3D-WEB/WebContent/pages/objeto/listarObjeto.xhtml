@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>  
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
@@ -7,12 +7,23 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/resources/template/template.xhtml">
 	<ui:define name="head">
-	    <h:outputStylesheet library="css" name="x3dom.css"/>
-	    <h:outputScript library="js" name="x3dom.js" />
+		<h:outputStylesheet library="css" name="x3dom.css" />
+		<h:outputScript library="js" name="x3dom.js" />
 	</ui:define>
 	<ui:define name="corpo">
-			<ui:repeat var="objeto" value="#{objetoMB.objetoList}">
-				<h:outputText value="#{objeto.objeto}" escape="false" />
-			</ui:repeat>
+		<h:form id="form">
+		    <p:dataGrid var="objeto" value="#{objetoMB.objetoList}" columns="2" layout="grid"
+		        rows="6" paginator="true" paginatorPosition="buttom"
+		        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		        rowsPerPageTemplate="6,12,18">
+		 
+	 
+		        <p:panel header="#{objeto.nome}" style="text-align:center">
+		            <h:panelGrid columns="1" style="width:100%">
+		                <h:outputText value="#{objeto.objeto}" escape="false" /> 
+		            </h:panelGrid>
+		        </p:panel>
+		    </p:dataGrid>
+		</h:form>
 	</ui:define>
 </ui:composition>
