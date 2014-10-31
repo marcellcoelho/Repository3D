@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>  
+<?xml version="1.0" encoding="UTF-8"?>  
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
@@ -15,7 +15,7 @@
 			</div>
 		</div>
 		<br />
-		<h:form id="form" prependId="true">
+		<h:form id="form" prependId="true" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="form-group">
@@ -35,19 +35,38 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-12">
 					<div class="form-group">
 						<p:outputLabel for="objeto3d" value="Objeto 3D:" />
-						<p:inputTextarea id="objeto3d" styleClass="form-control" style="resize: none;"
-							value="#{objetoMB.objeto.objeto}" rows="20" autoResize="false"
-							required="true"/>
+						<p:fileUpload id="objeto3d" mode="advanced"
+							uploadLabel="Adicionar" cancelLabel="Cancelar" 
+							fileUploadListener="#{objetoMB.handleFileUpload}" multiple="true"
+							label="Escolher Arquivo" />
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<p:dataTable id="arquivoList" var="arquivo" value="#{objetoMB.arquivoList}">
+							<p:column width="50%" headerText="Nome do arquivo">
+								<h:outputText value="#{arquivo.nome}" />
+							</p:column>
+
+							<p:column width="40%" headerText="Tipo do Arquivo">
+								<h:outputText value="#{arquivo.tipoArquivoEnum.toString()}" />
+							</p:column>
+							<p:column styleClass="text-center" headerText="Opções">
+								<p:commandButton styleClass="btn btn-xs btn-default scw-icon-trash hasTooltip"
+									title="Remover" value=" " action="teste" />
+							</p:column>
+						</p:dataTable>
 					</div>
 				</div>
 			</div>
 
-			<p:commandButton action="#{objetoMB.cadastrarObjeto()}" update="form" value="Cadastrar" />
+			<p:commandButton action="#{objetoMB.cadastrarObjeto()}" update="form" value="Cadastrar" ajax="false" />
 			<p:commandButton type="reset" value="Cancelar" update="form" style="margin-left: 10px;" />
 		</h:form>
 	</ui:define>
