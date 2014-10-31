@@ -36,7 +36,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-8">
 					<div class="form-group">
 						<p:outputLabel for="objeto3d" value="Objeto 3D:" />
 						<p:fileUpload id="objeto3d" mode="advanced"
@@ -47,17 +47,18 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-lg-6">
 					<div class="form-group">
+						<p:outputLabel value="Arquivos adicionados:" />
 						<p:dataTable id="arquivoList" var="arquivo" value="#{objetoMB.arquivoList}">
-							<p:column width="50%" headerText="Nome do arquivo">
+							<p:column width="60%" headerText="Nome do arquivo">
 								<h:outputText value="#{arquivo.nome}" />
 							</p:column>
 
-							<p:column width="40%" headerText="Tipo do Arquivo">
+							<p:column width="20%" headerText="Tipo do Arquivo">
 								<h:outputText value="#{arquivo.tipoArquivoEnum.toString()}" />
 							</p:column>
-							<p:column styleClass="text-center" headerText="Opções">
+							<p:column width="20%" styleClass="text-center" headerText="Opções">
 								<p:commandButton styleClass="btn btn-xs btn-default scw-icon-trash hasTooltip"
 									title="Remover" value=" " action="teste" />
 							</p:column>
