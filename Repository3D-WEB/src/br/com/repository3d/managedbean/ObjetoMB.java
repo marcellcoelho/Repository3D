@@ -19,10 +19,10 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
-import br.com.repository.entidades.Arquivo;
 import br.com.repository.entidades.Categoria;
 import br.com.repository.entidades.Objeto;
 import br.com.repository.enums.TipoArquivoEnum;
+import br.com.repository3d.VO.Arquivo;
 import br.com.repository3d.commom.ConversationBaseBean;
 import br.com.repository3d.service.ObjetoService;
 
@@ -54,7 +54,9 @@ public class ObjetoMB extends ConversationBaseBean {
 	}
 	
 	public String cadastrarObjeto() {
-		objeto.setObjeto(extrairX3D(file));
+		for (Arquivo arquivo : arquivoList) {
+			objeto.setObjeto(extrairX3D(arquivo.getFile()));
+		}
 		objeto.setCategoria(categoria);
 		objetoService.salvar(objeto);
 		objetoList = objetoService.getAllOrderByNome();
@@ -73,6 +75,7 @@ public class ObjetoMB extends ConversationBaseBean {
 	        Arquivo arquivo = new Arquivo();
 			arquivo.setNome(event.getFile().getFileName());
 			arquivo.setTipoArquivoEnum(TipoArquivoEnum.X3D);
+			arquivo.setFile(event.getFile());
 			arquivoList.add(arquivo);
 			RequestContext.getCurrentInstance().update("form:arquivoList");
 	    }
