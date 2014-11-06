@@ -1,6 +1,7 @@
 package br.com.repository3d.managedbean;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -54,8 +55,10 @@ public class ObjetoMB extends ConversationBaseBean {
 	}
 	
 	public String cadastrarObjeto() {
-		for (Arquivo arquivo : arquivoList) {
-			objeto.setObjeto(extrairX3D(arquivo.getFile()));
+		try {
+			objeto.setObjeto(objetoService.convertX3dParaX3DOM(arquivoList.get(0).getFile().getInputstream()));
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		objeto.setCategoria(categoria);
 		objetoService.salvar(objeto);
@@ -79,32 +82,6 @@ public class ObjetoMB extends ConversationBaseBean {
 			arquivoList.add(arquivo);
 			RequestContext.getCurrentInstance().update("form:arquivoList");
 	    }
-	
-	private String extrairX3D(UploadedFile file) {
-		String x3d = "";
-		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputstream()));  
-			while(br.ready()){   
-				x3d += br.readLine();   
-			}
-			br.close();  
-		} catch (IOException e) {
-			e.printStackTrace();
-		}   
-		x3d = x3d.replaceAll("width\\s{0,}=\"[0-9]*\\w{0,}\"", "");
-		x3d = x3d.replaceAll("height\\s{0,}=\"[0-9]*\\w{0,}\"", "");
-		x3d = x3d.replaceAll("\\<\\s{0,}canvas\\s{0,}.*\\<\\s{0,}\\/\\s{0,}canvas\\>", "");
-		x3d = x3d.replaceAll("  ", "");
-		
-		 Pattern pattern = Pattern.compile("\\<\\s*{0,}x3d\\s*{0,}.*\\<\\s{0,}/\\s{0,}x3d\\>", Pattern.CASE_INSENSITIVE);  
-	     Matcher matcher2 = pattern.matcher(x3d); 
-	     
-	     while(matcher2.find()){
-         	x3d = matcher2.group();
-         }
-	     return x3d;
-	}
-	
 	
 	// *************************SETs & GETs ***********************/
 	
