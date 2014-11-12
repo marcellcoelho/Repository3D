@@ -20,10 +20,8 @@
 		</div>
 		<br />
 		<h:form id="form">
-		    <p:dataGrid var="objeto" value="#{objetoMB.objetoList}" columns="2" layout="grid"
-		        rows="6" paginator="true" paginatorPosition="bottom"
-		        paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-		        rowsPerPageTemplate="6,12,18">
+		    <p:dataGrid var="objeto" value="#{objetoMB.objetoList}" columns="3" layout="grid"
+		         paginator="false">
 		        <p:panel header="#{objeto.nome}" style="text-align:center">
 		            <h:panelGrid columns="1" width="100%" style="height: 400px;">
 		                <h:outputText value="#{objeto.objeto}" escape="false" /> 
