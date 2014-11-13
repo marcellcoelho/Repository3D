@@ -8,9 +8,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="TB_OBJETO")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Objeto extends AbstractEntity  {
 	
 	private static final long serialVersionUID = -5444577034450119188L;
@@ -29,6 +35,7 @@ public class Objeto extends AbstractEntity  {
 	
 	@ManyToOne
 	@JoinColumn(name = "FK_CATEGORIA")
+	@XmlTransient
 	private Categoria categoria;
 	
 	public Long getIdObjeto() {

@@ -25,4 +25,18 @@ public class ObjetoRepository extends Repository<Objeto, Long> {
 		.getResultList();
 	}
 
+	public List<Objeto> getAllObjetosPorIdCategoria(Long idCategoria) {
+		return getEntityManager()
+				.createNativeQuery("SELECT * FROM tb_objeto where FK_CATEGORIA= :idCategoria", Objeto.class)
+				.setParameter("idCategoria", idCategoria)
+				.getResultList();
+	}
+
+	public Objeto getObjetoPorID(Long idObjeto) {
+		return (Objeto) getEntityManager()
+				.createNativeQuery("SELECT * FROM tb_objeto where ID_OBJETO= :idObjeto", Objeto.class)
+				.setParameter("idObjeto", idObjeto)
+				.getSingleResult();
+	}
+
 }
