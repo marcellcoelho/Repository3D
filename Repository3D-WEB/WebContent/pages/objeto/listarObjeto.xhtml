@@ -22,7 +22,7 @@
 		<h:form id="form">
 		    <p:dataGrid var="objeto" value="#{objetoMB.objetoList}" columns="3" layout="grid"
 		         paginator="false">
-		        <p:panel header="#{objeto.nome}" style="text-align:center">
+		        <p:panel header="#{objeto.idObjeto} - #{objeto.nome}" style="text-align:center">
 		            <h:panelGrid columns="1" width="100%" style="height: 400px;">
 		                <h:outputText value="#{objeto.objeto}" escape="false" /> 
 		            </h:panelGrid>
